@@ -1,0 +1,63 @@
+@import url('./fonts.css');
+
+@layer base {
+  :root {
+    --chart-1: #56616b;
+    --chart-2: #131316;
+    --chart-3: #56616b;
+    --chart-4: #131316;
+    --chart-5: #56616b;
+  }
+
+  .dark {
+    --chart-1: #56616b;
+    --chart-2: #131316;
+    --chart-3: #56616b;
+    --chart-4: #131316;
+    --chart-5: #56616b;
+  }
+}
+
+body {
+  font-family: Degular, sans-serif;
+  font-weight: 400;
+}
+
+#header {
+  box-shadow:
+    0px 2px 4px 0px rgba(45, 59, 67, 0.05),
+    0px 2px 6px 0px rgba(45, 59, 67, 0.06);
+}
+
+.popover-content {
+  border-radius: 20px;
+  box-shadow:
+    rgba(219, 222, 229, 0.08) 0px 16px 32px 12px,
+    rgba(129, 139, 165, 0.08) 0px 12px 24px 6px;
+}
+
+.popover-content > div {
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow:
+    rgba(219, 222, 229, 0.08) 0px 16px 32px 12px,
+    rgba(129, 139, 165, 0.08) 0px 12px 24px 6px;
+  max-width: 400px;
+}
+
+#avatar-name {
+  font-family: 'Degular', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  background: linear-gradient(138.98deg, #56616b 2.33%, #131316 96.28%);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+#avatar-name span {
+  background: linear-gradient(107.68deg, #ffffff -6.45%, #f2f3f5 114.84%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
