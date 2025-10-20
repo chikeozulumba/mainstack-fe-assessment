@@ -88,8 +88,14 @@ export default function Header() {
     }
 
     // Otherwise, check if the hash matches (without the # symbol)
-    return location.hash === `${itemHash}`
+    return (
+      location.hash === `${itemHash}` ||
+      (itemPath !== '/' && location.hash.startsWith(`${itemHash}`))
+    )
   }
+
+  const search = new URLSearchParams(window.location.search)
+  const source = search.get('source')
 
   return (
     <>
@@ -111,7 +117,10 @@ export default function Header() {
             return (
               <Link
                 onClick={() => setActiveMenu(item.to)}
-                to={item.to}
+                to={
+                  item.to +
+                  (item.to !== '/' ? '?source=' + (source || 'api') : '')
+                }
                 className={`transition-all duration-300 ease-in-out tracking-[-0.4px] inline-flex items-center gap-2 h-[40px] px-[14px] divide-y-0 divide-[red] font-[600] text-[16px] ${
                   index !== 0 ? 'ml-[20px]' : 'ml-[0px]'
                 } ${

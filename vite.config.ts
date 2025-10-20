@@ -2,7 +2,7 @@ import { resolve } from 'node:path'
 
 import tailwindcss from '@tailwindcss/vite'
 import viteReact from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
@@ -30,6 +30,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    setupFiles: './setupTests.js',
   },
   resolve: {
     alias: {

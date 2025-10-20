@@ -15,7 +15,7 @@ export interface AuthContext {
   isAuthenticated: boolean
 }
 
-const AuthContext = React.createContext<AuthContext | null>(null)
+export const AuthContext = React.createContext<AuthContext | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const getUserQuery = useGetUser()

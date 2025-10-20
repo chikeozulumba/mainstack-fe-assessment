@@ -81,6 +81,7 @@ export function Button({
         defaultClassName,
         className,
       )}
+      disabled={disabled}
       {...props}
     >
       <>
