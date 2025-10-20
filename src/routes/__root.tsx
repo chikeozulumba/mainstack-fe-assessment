@@ -10,6 +10,7 @@ import type { AuthContext } from '@/providers/AuthProvider'
 import type { QueryClient } from '@tanstack/react-query'
 
 import { FilterComponent } from '@/components/home/Filter'
+import { SideBarComponent } from '@/components/SideBar'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -21,7 +22,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     <>
       <FilterComponent />
       <Header />
-      <div className="max-w-[1160px] mx-auto">
+      <div className="max-w-[1160px] mx-auto relative">
+        <SideBarComponent />
         <Outlet />
       </div>
       <TanStackDevtools

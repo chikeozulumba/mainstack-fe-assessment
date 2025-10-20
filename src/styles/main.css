@@ -62,7 +62,12 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.recharts-cartesian-axis-tick {
-  /* transform: translateY(10px); */
-  /* transform: rotate(180); */
+#app-sidebar {
+  box-shadow:
+    0px 6px 12px 0px rgba(92, 115, 131, 0.08),
+    0px 4px 8px 0px rgba(92, 115, 131, 0.08);
+}
+
+.grey-overlay {
+  filter: grayscale(100%);
 }
