@@ -1,10 +1,11 @@
 import ExclaimationIcon from '@/assets/svgs/exclaimation.svg?react'
+
 import { cn } from '@/lib/utils'
 
 type SideMetricsComponentProps = {
   options: Array<{
     title: string
-    value: string
+    value: string | number
   }>
 }
 

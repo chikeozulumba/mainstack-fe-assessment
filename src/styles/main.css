@@ -38,10 +38,6 @@ body {
 }
 
 .popover-content > div {
-  border: 2px solid rgb(255, 255, 255);
-  box-shadow:
-    rgba(219, 222, 229, 0.08) 0px 16px 32px 12px,
-    rgba(129, 139, 165, 0.08) 0px 12px 24px 6px;
   max-width: 400px;
 }
 
@@ -64,4 +60,9 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.recharts-cartesian-axis-tick {
+  /* transform: translateY(10px); */
+  /* transform: rotate(180); */
 }

@@ -1,6 +1,6 @@
 import { Link, useLocation } from '@tanstack/react-router'
 import { useState } from 'react'
-import { AvatarComponent } from './Avatar'
+import { Avatar } from './Avatar'
 import { AppsSideComponent } from './header/Apps'
 import { ProfileDropdownComponent } from './header/ProfileDropdown'
 
@@ -12,7 +12,6 @@ import ChatIcon from '@/assets/svgs/chat.svg?react'
 import CRMIcon from '@/assets/svgs/crm.svg?react'
 import HomeIcon from '@/assets/svgs/home.svg?react'
 import Logo from '@/assets/svgs/logo.svg?react'
-import MenuIcon from '@/assets/svgs/menu.svg?react'
 
 const menuItems = [
   {
@@ -155,13 +154,9 @@ export default function Header() {
           ))}
 
           <ProfileDropdownComponent>
-            <button className="h-[40px] w-[81px] text-[#56616B] flex items-center justify-between bg-[#EFF1F6] rounded-[100px] px-[5px] cursor-pointer transition-all duration-200">
-              <AvatarComponent />
-
-              <div className="h-[32px] w-[32px] flex items-center justify-center">
-                <MenuIcon width={'17px'} height={'10.55px'} />
-              </div>
-            </button>
+            <div>
+              <Avatar.Main />
+            </div>
           </ProfileDropdownComponent>
         </div>
       </header>

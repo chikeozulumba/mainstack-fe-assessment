@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { useStore } from 'zustand'
 import { Button } from './Button'
 
+import { NotAvailable } from './display/NotAvailable'
+
 import type { TransactionTableRecord } from '@/types'
 
 import ArrowDownIcon from '@/assets/svgs/arrow-down.svg?react'
@@ -22,7 +24,7 @@ const filterTermText = {
 }
 
 export function TransactionsTableComponent({ records = [] }: Props) {
-  const { filters, filterTerm, toggleModal } = useStore(filterStore)
+  const { filters, filterTerm, toggleModal, setFilters } = useStore(filterStore)
 
   const validFiltersLength = useMemo(() => {
     return Object.values(filters).filter((filter) => {
@@ -34,6 +36,20 @@ export function TransactionsTableComponent({ records = [] }: Props) {
       return valid
     }).length
   }, [filters])
+
+  const noRecords = records.length === 0 && validFiltersLength > 0
+
+  const clearFilters = () => {
+    setFilters(
+      {
+        dateRange: [],
+        transactionType: [],
+        transactionStatus: [],
+        chartDisplay: 'value',
+      },
+      undefined,
+    )
+  }
 
   return (
     <div className="w-full">
@@ -81,7 +97,13 @@ export function TransactionsTableComponent({ records = [] }: Props) {
         </div>
       </div>
 
-      <div className="w-full mt-[33px] gap-y-[24px] flex flex-col">
+      <div
+        className={cn(
+          'w-full mt-[33px] gap-y-[24px] flex flex-col',
+          noRecords && 'h-[600px] flex items-center justify-center',
+        )}
+      >
+        {noRecords && <NotAvailable onClick={clearFilters} />}
         {records.map((transaction, index) => (
           <div
             className="w-full flex flex-row items-center gap-x-[14.5px]"

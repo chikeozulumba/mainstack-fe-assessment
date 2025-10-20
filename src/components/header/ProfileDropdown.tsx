@@ -8,10 +8,11 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/outline'
 import { Link } from '@tanstack/react-router'
-import { AvatarComponent } from '../Avatar'
+import { Avatar } from '../Avatar'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/providers'
 
 type ProfileDropdownComponentProps = {
   open?: boolean
@@ -54,6 +55,8 @@ export function ProfileDropdownComponent({
   onOpenChange = () => {},
   children,
 }: ProfileDropdownComponentProps) {
+  const { user } = useAuth()
+
   return (
     <Popover onOpenChange={onOpenChange}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
@@ -63,13 +66,13 @@ export function ProfileDropdownComponent({
       >
         <div className="w-full flex flex-col h-[fill-available] items-start justify-between">
           <div className="flex items-center justify-start gap-x-[12px] p-[14px] border-b-[1px] border-[#EFF1F6]/50 w-full">
-            <AvatarComponent />
+            <Avatar.Picture />
             <div className="flex flex-col items-start justify-between gap-y-[0px]">
               <h4 className="text-[#131316] text-[18px] font-[600] leading-[120%] tracking-[-0.1px]">
-                John Doe
+                {user?.first_name} {user?.last_name}
               </h4>
               <p className="text-[#56616B] text-[14px] font-[500] leading-[160%] tracking-[-0.1px] -mt-[2px]">
-                john.doe@example.com
+                {user?.email}
               </p>
             </div>
           </div>
@@ -79,7 +82,6 @@ export function ProfileDropdownComponent({
               key={index}
               className={cn(
                 'w-full flex flex-row items-center justify-start gap-y-[0px] gap-x-[12px] cursor-pointer p-[12px] hover:bg-[#EFF1F6]',
-                // index !== 0 && 'mt-[8px]',
               )}
               onClick={() => onOpenChange(false)}
             >

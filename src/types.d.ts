@@ -43,3 +43,9 @@ export type TransactionTableRecord = {
   date: string
   status: string
 }
+
+export type AuthUser = {
+  email: string
+  first_name: string
+  last_name: string
+}

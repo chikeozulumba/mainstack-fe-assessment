@@ -1,7 +1,7 @@
 export const wallet = {
-  balance: 750.56,
-  total_payout: 500,
-  total_revenue: 1250.56,
-  pending_payout: 0,
-  ledger_balance: 500,
+  balance: 1065099.56,
+  total_payout: 500650,
+  total_revenue: 1250650.56,
+  pending_payout: 450650.56,
+  ledger_balance: 615034.56,
 }
