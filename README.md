@@ -29,6 +29,6 @@ To build this application for production:
 bun --bun run build
 ```
 
-# Deployment
+### Deployment
 
 This application was deployed on Netlify. You can view the deployed application at [https://mainstackassessment.netlify.app/](https://mainstackassessment.netlify.app/)
