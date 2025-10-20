@@ -3,6 +3,7 @@
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 
 import type { ChartConfig } from '@/components/ui/chart'
+import type { CurveType } from 'recharts/types/shape/Curve'
 
 import {
   ChartContainer,
@@ -29,13 +30,24 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+type MainChartComponentProps = {
+  className?: string
+  areaChartClassName?: string
+  data?: Array<{
+    [key: string]: number | string
+  }>
+  areaDataKey?: string
+  dataKey?: string
+  areaType?: CurveType
+}
 export function MainChartComponent({
   className,
   areaChartClassName,
-}: {
-  className?: string
-  areaChartClassName?: string
-}) {
+  data = chartData,
+  areaDataKey = 'desktop',
+  dataKey = 'month',
+  areaType = 'natural',
+}: MainChartComponentProps) {
   return (
     <ChartContainer
       className={cn('w-full h-full', className)}
@@ -44,7 +56,7 @@ export function MainChartComponent({
       <AreaChart
         className={cn('w-full h-full', areaChartClassName)}
         accessibilityLayer
-        data={chartData}
+        data={data}
         margin={{
           left: 12,
           right: 12,
@@ -52,21 +64,21 @@ export function MainChartComponent({
       >
         <CartesianGrid vertical={false} />
         <XAxis
-          dataKey="month"
+          dataKey={dataKey}
           tickLine={false}
           axisLine={false}
           tickMargin={8}
-          tickFormatter={(value) => value.slice(0, 3)}
+          tickFormatter={(value) => value}
         />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent indicator="line" />}
         />
         <Area
-          dataKey="desktop"
-          type="natural"
-          fill="transparent"
-          fillOpacity={0.4}
+          dataKey={areaDataKey}
+          type={areaType}
+          fill=" #FF1744"
+          fillOpacity={0.01}
           stroke="#FF5403"
         />
       </AreaChart>

@@ -54,7 +54,7 @@ export function AppsSideComponent({
           <ArrowDownIcon width={'11px'} height={'7px'} className="mt-[2px]" />
         </div>
       </PopoverTrigger>
-      <PopoverContent className="popover-content px-0 py-0 mt-[42px] border-none w-[400px]">
+      <PopoverContent className="popover-content px-0 py-0 mt-[26px] border-none w-[400px]">
         <div className="w-full flex flex-col h-[fill-available] items-start justify-between p-[8px bg-[rgb(255, 255, 255)]">
           {menuItems.map((item, index) => (
             <div

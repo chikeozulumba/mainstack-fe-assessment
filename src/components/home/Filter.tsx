@@ -27,7 +27,14 @@ import {
 import { cn } from '@/lib/utils'
 import { filterStore } from '@/store'
 
-type SelectedRange = 'today' | 'last7Days' | 'thisMonth' | 'last3Months'
+type SelectedRange =
+  | 'today'
+  | 'last7Days'
+  | 'thisMonth'
+  | 'last3Months'
+  | 'range'
+
+type ChartDisplay = 'day' | 'month' | 'year' | 'value'
 
 const rangeFilterDates = {
   today: [startOfDay(new Date()), endOfDay(new Date())],
@@ -35,6 +42,25 @@ const rangeFilterDates = {
   thisMonth: [startOfMonth(new Date()), endOfMonth(new Date())],
   last3Months: [subMonths(new Date(), 3), new Date()],
 }
+
+const chartDisplayOptions = [
+  {
+    label: 'By Value',
+    value: 'value',
+  },
+  {
+    label: 'By Day',
+    value: 'day',
+  },
+  {
+    label: 'By Month',
+    value: 'month',
+  },
+  {
+    label: 'By Year',
+    value: 'year',
+  },
+]
 
 const rangeFilterOptions = [
   {
@@ -68,6 +94,9 @@ const compareDates = (
 export const FilterComponent = () => {
   const { showModal, toggleModal, setFilters } = useStore(filterStore)
   const [selectedRange, setSelectedRange] = useState<SelectedRange | undefined>(
+    undefined,
+  )
+  const [chartDisplay, setChartDisplay] = useState<ChartDisplay | undefined>(
     undefined,
   )
 
@@ -106,18 +135,23 @@ export const FilterComponent = () => {
   const canFilter =
     validateDateFilters ||
     validateSelectedOptions ||
-    selectedRange !== undefined
+    selectedRange !== undefined ||
+    chartDisplay !== undefined
 
   const clearFilters = () => {
     setSelectedRange(undefined)
     setDates(Array.from({ length: 2 }, () => undefined))
     setTransactionTypeSelectedOptions({})
     setTransactionStatusSelectedOptions({})
-    setFilters({
-      dateRange: [],
-      transactionType: [],
-      transactionStatus: [],
-    })
+    setFilters(
+      {
+        dateRange: [],
+        transactionType: [],
+        transactionStatus: [],
+        chartDisplay: 'value',
+      },
+      undefined,
+    )
   }
 
   const handleRangeFilterClick = (range: SelectedRange) => {
@@ -128,6 +162,7 @@ export const FilterComponent = () => {
     }
 
     setSelectedRange(range)
+    if (range === 'range') return
     setDates(rangeFilterDates[range])
   }
 
@@ -135,6 +170,7 @@ export const FilterComponent = () => {
     if (!canFilter) return
 
     const filters = {
+      chartDisplay: chartDisplay ?? 'value',
       dateRange: dates,
       transactionType: Object.values(transactionTypeSelectedOptions)
         .map((option) => option?.value)
@@ -144,7 +180,7 @@ export const FilterComponent = () => {
         .filter((option) => option !== undefined),
     }
 
-    setFilters(filters)
+    setFilters(filters, selectedRange)
     toggleModal(false)
   }
 
@@ -188,6 +224,7 @@ export const FilterComponent = () => {
               variant="outline"
               size="xs"
               active={selectedRange === option.value}
+              className={'font-[500]'}
               onClick={() =>
                 handleRangeFilterClick(option.value as SelectedRange)
               }
@@ -214,7 +251,7 @@ export const FilterComponent = () => {
               dates={dates}
               setDates={(...args) => {
                 setDates(...args)
-                setSelectedRange(undefined)
+                setSelectedRange('range')
               }}
               placeholders={['Start Date', 'End Date'] as const}
             />
@@ -248,6 +285,24 @@ export const FilterComponent = () => {
               options={transactionStatusOptions}
               setSelectedOptionsState={setTransactionStatusSelectedOptions}
             />
+          </div>
+        </div>
+        <div className="w-full flex flex-col items-start justify-between px-[24px] gap-y-[12px] mt-[24px]">
+          <h3 className="text-[16px] font-[600] leading-[24px] tracking-[-0.4px] text-[#131316] content-center align-middle">
+            Chart Display
+          </h3>
+          <div className="w-full flex flex-row items-center justify-start gap-x-[12px] mt-[8px]">
+            {chartDisplayOptions.map((option) => (
+              <Button
+                key={option.value}
+                label={option.label}
+                variant="outline"
+                size="xs"
+                active={chartDisplay === option.value}
+                className={'font-[500] w-full'}
+                onClick={() => setChartDisplay(option.value as ChartDisplay)}
+              />
+            ))}
           </div>
         </div>
       </div>

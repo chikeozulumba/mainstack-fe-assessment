@@ -21,6 +21,7 @@ export function formatDate(
           fromFormat || '',
           new Date(),
         )
+
     return DateFnsFormat(parsedDate, toFormat || '').toString()
   } catch (error) {
     return 'Invalid date'

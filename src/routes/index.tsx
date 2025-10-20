@@ -15,6 +15,7 @@ import { filterStore } from '@/store'
 
 import TransactionArrowDownIcon from '@/assets/svgs/arrow-negative.svg?react'
 import TransactionArrowUpIcon from '@/assets/svgs/arrow-positive.svg?react'
+import { formatTransactionsToChartData } from '@/lib/chart'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -22,39 +23,45 @@ export const Route = createFileRoute('/')({
 
 function App() {
   const { filters } = useStore(filterStore)
+  const chartDisplay = filters.chartDisplay
 
-  const filteredTransactions = useMemo(() => {
-    const filteredTransactionsCollection = transactions.filter((record) => {
-      // If date range filter is not set, treat as valid (true)
-      // If set, check if record date is within the range
-      const dateRangeValid =
-        !(
-          filters.dateRange.length === 2 &&
-          filters.dateRange[0] &&
-          filters.dateRange[1]
-        ) ||
-        isWithinInterval(new Date(record.date), {
-          start: new Date(filters.dateRange[0]),
-          end: new Date(filters.dateRange[1]),
-        })
+  const filteredTransactions = useMemo(
+    () =>
+      transactions.filter((record) => {
+        // If date range filter is not set, treat as valid (true)
+        // If set, check if record date is within the range
+        const dateRangeValid =
+          !(
+            filters.dateRange.length === 2 &&
+            filters.dateRange[0] &&
+            filters.dateRange[1]
+          ) ||
+          isWithinInterval(new Date(record.date), {
+            start: new Date(filters.dateRange[0]),
+            end: new Date(filters.dateRange[1]),
+          })
 
-      // If transaction type filter is not set, treat as valid (true)
-      // If set, check if record type matches
-      const transactionTypeValid =
-        !(filters.transactionType && filters.transactionType.length > 0) ||
-        filters.transactionType.includes(record.type)
+        // If transaction type filter is not set, treat as valid (true)
+        // If set, check if record type matches
+        const transactionTypeValid =
+          !(filters.transactionType && filters.transactionType.length > 0) ||
+          filters.transactionType.includes(record.type)
 
-      // If transaction status filter is not set, treat as valid (true)
-      // If set, check if record status matches
-      const transactionStatusValid =
-        !(filters.transactionStatus && filters.transactionStatus.length > 0) ||
-        filters.transactionStatus.includes(record.status)
+        // If transaction status filter is not set, treat as valid (true)
+        // If set, check if record status matches
+        const transactionStatusValid =
+          !(
+            filters.transactionStatus && filters.transactionStatus.length > 0
+          ) || filters.transactionStatus.includes(record.status)
 
-      // All applied filters must pass
-      return dateRangeValid && transactionTypeValid && transactionStatusValid
-    })
+        // All applied filters must pass
+        return dateRangeValid && transactionTypeValid && transactionStatusValid
+      }),
+    [filters, transactions],
+  )
 
-    return filteredTransactionsCollection
+  const filteredTransactionsTableData = useMemo(() => {
+    return filteredTransactions
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .map((record) => ({
         icon:
@@ -75,6 +82,24 @@ function App() {
       }))
   }, [transactions, filters])
 
+  const chartData = useMemo(() => {
+    const data = formatTransactionsToChartData(
+      filteredTransactions,
+      chartDisplay,
+    )
+
+    const refinedChartData = Object.entries(data).map(([date, value]) => ({
+      label: date,
+      value,
+    }))
+
+    if (chartDisplay === 'value' || chartDisplay === 'month') {
+      return refinedChartData.reverse()
+    }
+
+    return refinedChartData
+  }, [filteredTransactions, chartDisplay])
+
   return (
     <div className="flex flex-col gap-y-[82px] mb-[120px]">
       <div className="text-center mt-[64px] flex justify-between items-start">
@@ -91,7 +116,13 @@ function App() {
             <Button label="Withdraw" size="lg" />
           </div>
           <div className="w-full mt-[24px]">
-            <MainChartComponent areaChartClassName="max-h-[257px]" />
+            <MainChartComponent
+              areaChartClassName="max-h-[257px]"
+              areaType={'linear'}
+              data={chartData}
+              dataKey="label"
+              areaDataKey="value"
+            />
           </div>
         </div>
 
@@ -101,7 +132,7 @@ function App() {
       </div>
 
       <div className="w-full">
-        <TransactionsTableComponent records={filteredTransactions} />
+        <TransactionsTableComponent records={filteredTransactionsTableData} />
       </div>
     </div>
   )

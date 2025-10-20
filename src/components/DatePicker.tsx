@@ -39,7 +39,7 @@ const DatePickerTrigger = ({
       )}
       {...props}
     >
-      <span className="text-[#131316] text-[14px] font-[600] leading-[16px] tracking-[-0.2px] content-center align-middle">
+      <span className="text-[#131316] text-[14px] font-[500] leading-[16px] tracking-[-0.2px] content-center align-middle">
         {formattedDate || placeholder}
       </span>
       <ChevronDownIcon className={cn('w-4 h-4', active && 'rotate-180')} />

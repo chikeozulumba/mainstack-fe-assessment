@@ -1,5 +1,35 @@
 export const transactions = [
   {
+    amount: 1500,
+    metadata: {
+      name: 'John Doe',
+      type: 'digital_product',
+      email: 'johndoe@example.com',
+      quantity: 1,
+      country: 'Nigeria',
+      product_name: 'Winter Soldiers',
+    },
+    payment_reference: 'c3f7123f-186f-4a45-b911-76736e9c5937',
+    status: 'successful',
+    type: 'deposit',
+    date: '2025-10-20',
+  },
+  {
+    amount: 4600,
+    metadata: {
+      name: 'John Doe',
+      type: 'digital_product',
+      email: 'johndoe@example.com',
+      quantity: 1,
+      country: 'Nigeria',
+      product_name: 'Home alone 1',
+    },
+    payment_reference: 'c3f7123f-186f-4a45-b911-76736e9c5937',
+    status: 'successful',
+    type: 'deposit',
+    date: '2025-10-20',
+  },
+  {
     amount: 500,
     metadata: {
       name: 'John Doe',

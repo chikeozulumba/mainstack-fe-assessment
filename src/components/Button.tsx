@@ -83,7 +83,9 @@ export function Button({
       )}
       {...props}
     >
-      {leftIcon && leftIcon} {children || label} {rightIcon && rightIcon}
+      <>
+        {leftIcon && leftIcon} {children || label} {rightIcon && rightIcon}
+      </>
     </button>
   )
 }

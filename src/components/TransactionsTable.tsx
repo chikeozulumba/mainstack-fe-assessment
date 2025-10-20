@@ -13,16 +13,26 @@ type Props = {
   records: Array<TransactionTableRecord>
 }
 
+const filterTermText = {
+  today: 'Your transactions for just today.',
+  last7Days: 'Your transactions for the last 7 days.',
+  thisMonth: 'Your transactions for this month.',
+  last3Months: 'Your transactions for the last 3 months.',
+  range: 'Your transactions for the selected date range.',
+}
+
 export function TransactionsTableComponent({ records = [] }: Props) {
-  const { filters, toggleModal } = useStore(filterStore)
+  const { filters, filterTerm, toggleModal } = useStore(filterStore)
 
   const validFiltersLength = useMemo(() => {
-    return Object.values(filters).filter(
-      (filter) =>
-        filter !== undefined &&
-        filter.some((f) => f !== undefined && f !== '') &&
-        filter.length > 0,
-    ).length
+    return Object.values(filters).filter((filter) => {
+      let valid = false
+      if (Array.isArray(filter)) {
+        valid =
+          filter.some((f) => f !== undefined && f !== '') && filter.length > 0
+      }
+      return valid
+    }).length
   }, [filters])
 
   return (
@@ -33,7 +43,9 @@ export function TransactionsTableComponent({ records = [] }: Props) {
             {records.length || 0} Transactions
           </h2>
           <p className="text-[14px] font-[400] leading-[20px] tracking-[-0.2px] text-[#56616B] text-start content-center align-middle">
-            Your transactions for the last 7 days
+            {filterTerm
+              ? filterTermText[filterTerm as keyof typeof filterTermText]
+              : 'Your transactions for all time sorted by the most recent date.'}
           </p>
         </div>
 

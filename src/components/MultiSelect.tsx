@@ -51,7 +51,7 @@ const MultiSelectTrigger = ({
   return (
     <button
       className={cn(
-        'p-[16px] relative w-full flex items-center justify-between h-[48px] rounded-[12px] border-[3px] text-[#131316] text-left pr-[32px] text-[14px] font-[600] leading-[16px] tracking-[-0.2px] content-center align-middle',
+        'p-[16px] relative w-full flex items-center justify-between h-[48px] rounded-[12px] border-[3px] text-[#131316] text-left pr-[32px] text-[14px] font-[500] leading-[16px] tracking-[-0.2px] content-center align-middle',
         active && 'border-[#131316]',
         !active && 'border-[#EFF1F6] bg-[#EFF1F6]',
       )}

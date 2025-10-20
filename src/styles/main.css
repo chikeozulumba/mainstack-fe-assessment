@@ -7,6 +7,7 @@
     --chart-3: #56616b;
     --chart-4: #131316;
     --chart-5: #56616b;
+    --color-desktop: #ff5403;
   }
 
   .dark {
@@ -38,11 +39,14 @@ body {
 
 .popover-content > div {
   border: 2px solid rgb(255, 255, 255);
-  border-radius: 20px;
   box-shadow:
     rgba(219, 222, 229, 0.08) 0px 16px 32px 12px,
     rgba(129, 139, 165, 0.08) 0px 12px 24px 6px;
   max-width: 400px;
+}
+
+.popover-content-profile > div {
+  max-width: 300px;
 }
 
 #avatar-name {

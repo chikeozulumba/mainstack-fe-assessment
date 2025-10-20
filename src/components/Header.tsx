@@ -1,6 +1,8 @@
 import { Link, useLocation } from '@tanstack/react-router'
 import { useState } from 'react'
+import { AvatarComponent } from './Avatar'
 import { AppsSideComponent } from './header/Apps'
+import { ProfileDropdownComponent } from './header/ProfileDropdown'
 
 import AnalyticsIcon from '@/assets/svgs/analytics.svg?react'
 import AppsIcon from '@/assets/svgs/app.svg?react'
@@ -152,18 +154,15 @@ export default function Header() {
             </button>
           ))}
 
-          <button className="h-[40px] w-[81px] text-[#56616B] flex items-center justify-between bg-[#EFF1F6] rounded-[100px] px-[5px] cursor-pointer transition-all duration-200">
-            <span
-              id="avatar-name"
-              className="text-[16px] font-bold h-[32px] w-[32px] flex items-center justify-center rounded-[100px]"
-            >
-              <span>JD</span>
-            </span>
+          <ProfileDropdownComponent>
+            <button className="h-[40px] w-[81px] text-[#56616B] flex items-center justify-between bg-[#EFF1F6] rounded-[100px] px-[5px] cursor-pointer transition-all duration-200">
+              <AvatarComponent />
 
-            <div className="h-[32px] w-[32px] flex items-center justify-center">
-              <MenuIcon width={'24px'} height={'24px'} />
-            </div>
-          </button>
+              <div className="h-[32px] w-[32px] flex items-center justify-center">
+                <MenuIcon width={'17px'} height={'10.55px'} />
+              </div>
+            </button>
+          </ProfileDropdownComponent>
         </div>
       </header>
     </>
