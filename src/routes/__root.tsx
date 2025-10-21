@@ -17,8 +17,11 @@ interface MyRouterContext {
   auth: AuthContext
 }
 
-export const Route = createRootRouteWithContext<MyRouterContext>()({
-  component: () => (
+const RootLayout = () => {
+  // check if in dev mode
+  const developmentMode = import.meta.env.VITE_ENV === 'development'
+
+  return (
     <>
       <FilterComponent />
       <Header />
@@ -28,18 +31,24 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         </div>
         <Outlet />
       </div>
-      <TanStackDevtools
-        config={{
-          position: 'bottom-right',
-        }}
-        plugins={[
-          {
-            name: 'Tanstack Router',
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-          TanStackQueryDevtools,
-        ]}
-      />
+      {developmentMode && (
+        <TanStackDevtools
+          config={{
+            position: 'bottom-right',
+          }}
+          plugins={[
+            {
+              name: 'Tanstack Router',
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+            TanStackQueryDevtools,
+          ]}
+        />
+      )}
     </>
-  ),
+  )
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
+  component: RootLayout,
 })
