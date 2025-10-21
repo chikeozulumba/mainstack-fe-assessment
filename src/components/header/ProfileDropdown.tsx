@@ -15,6 +15,11 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/providers'
 
 type ProfileDropdownComponentProps = {
+  mobileMenu?: Array<{
+    label: string
+    to: string
+    icon: React.ReactNode
+  }>
   open?: boolean
   onOpenChange?: (open: boolean) => void
   children: React.ReactNode
@@ -52,6 +57,7 @@ const menuItems = [
 ]
 
 export function ProfileDropdownComponent({
+  mobileMenu = [],
   onOpenChange = () => {},
   children,
 }: ProfileDropdownComponentProps) {
@@ -76,6 +82,22 @@ export function ProfileDropdownComponent({
               </p>
             </div>
           </div>
+          {mobileMenu.map((item, index) => (
+            <Link
+              to={'/'}
+              key={index}
+              className={cn(
+                'w-full flex flex-row items-center justify-start gap-y-[0px] gap-x-[12px] cursor-pointer p-[12px] hover:bg-[#EFF1F6]',
+              )}
+              onClick={() => onOpenChange(false)}
+            >
+              {item.icon}
+
+              <h4 className="text-[#131316] text-[16px] font-[500] leading-[120%] tracking-[-0.1px]">
+                {item.label}
+              </h4>
+            </Link>
+          ))}
           {menuItems.map((item, index) => (
             <Link
               to={'/'}

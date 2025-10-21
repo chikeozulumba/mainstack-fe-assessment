@@ -27,7 +27,7 @@ export function DrawerComponent({
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
             <DialogPanel
               transition
-              className="pointer-events-auto relative w-screen transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700 max-w-[520px]"
+              className="pointer-events-auto relative w-screen transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700 sm:max-w-[520px] max-w-[100%]"
             >
               <div className="relative flex h-full flex-col overflow-y-auto bg-transparent after:absolute after:inset-y-0 after:left-0 after:w-px p-[12px] w-full">
                 <div

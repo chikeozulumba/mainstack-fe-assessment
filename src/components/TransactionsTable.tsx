@@ -53,7 +53,7 @@ export function TransactionsTableComponent({ records = [] }: Props) {
 
   return (
     <div className="w-full">
-      <div className="w-full flex flex-row items-start justify-between gap-x-[24px] pb-[24px] border-b-[1px] border-[#EFF1F6]">
+      <div className="w-full flex flex-col sm:flex-row sm:gap-y-[12px] items-start justify-between gap-y-[24px] pb-[24px] border-b-[1px] border-[#EFF1F6] ">
         <div className="w-full flex flex-col gap-y-[0px]">
           <h2 className="text-[24px] font-[700] leading-[32px] tracking-[-0.6px] text-start content-center align-middle text-[#131316]">
             {records.length || 0} Transactions
@@ -100,7 +100,8 @@ export function TransactionsTableComponent({ records = [] }: Props) {
       <div
         className={cn(
           'w-full mt-[33px] gap-y-[24px] flex flex-col',
-          noRecords && 'h-[600px] flex items-center justify-center',
+          noRecords &&
+            'sm:h-[600px] h-[300px] flex items-center justify-center',
         )}
       >
         {noRecords && <NotAvailable onClick={clearFilters} />}
@@ -110,9 +111,9 @@ export function TransactionsTableComponent({ records = [] }: Props) {
             key={index}
           >
             <div className="w-fit">{transaction.icon}</div>
-            <div className="w-full flex">
-              <div className="w-full flex flex-col gap-y-[9px]">
-                <h3 className="text-[16px] font-[500] leading-[24px] tracking-[-0.2px] text-[#131316] text-start content-center align-middle">
+            <div className="w-full flex sm:items-center items-start">
+              <div className="w-full flex flex-col sm:gap-y-[9px] gap-y-[0px]">
+                <h3 className="text-[16px] font-[500] leading-[24px] tracking-[-0.2px] text-[#131316] text-start content-center align-middle truncate overflow-hidden sm:overflow-auto max-w-[150px] sm:max-w-full">
                   {transaction.title}
                 </h3>
                 <p
@@ -132,7 +133,7 @@ export function TransactionsTableComponent({ records = [] }: Props) {
                   {transaction.subtitle}
                 </p>
               </div>
-              <div className="flex flex-col gap-y-[9px] whitespace-nowrap justify-end items-end">
+              <div className="flex flex-col sm:gap-y-[9px] gap-y-[0px] whitespace-nowrap justify-end items-end">
                 <h3 className="text-[16px] font-[700] leading-[150%] tracking-[-0.4px] text-[#131316] text-start content-end align-middle whitespace-nowrap">
                   {transaction.amount}
                 </h3>

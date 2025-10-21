@@ -48,6 +48,19 @@ export function MainChartComponent({
   dataKey = 'month',
   areaType = 'natural',
 }: MainChartComponentProps) {
+  // check if chartdata is empty
+  const isEmpty = data.length === 0
+
+  if (isEmpty) {
+    return (
+      <div className="w-full h-full min-h-[257px] flex items-center justify-center border-[1px] border-[#EFF1F6] rounded-[12px] ">
+        <h1 className="text-[20px] font-[400] tracking-[-0.6px] px-[16px] py-[12px]">
+          <span className="text-[#56616B]">No data available</span>
+        </h1>
+      </div>
+    )
+  }
+
   return (
     <ChartContainer
       className={cn('w-full h-full', className)}

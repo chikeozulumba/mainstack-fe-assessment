@@ -216,7 +216,7 @@ export const FilterComponent = () => {
         </div>
 
         {/* Range filter options */}
-        <div className="w-full flex flex-row items-center justify-between px-[24px] gap-x-[12px] mt-[8px]">
+        <div className="w-full flex flex-row items-center sm:justify-between justify-start px-[24px] gap-x-[12px] mt-[8px] sm:flex-nowrap flex-wrap gap-y-[12px] sm:gap-y-0">
           {rangeFilterOptions.map((option) => (
             <Button
               key={option.value}
@@ -291,7 +291,7 @@ export const FilterComponent = () => {
           <h3 className="text-[16px] font-[600] leading-[24px] tracking-[-0.4px] text-[#131316] content-center align-middle">
             Chart Display
           </h3>
-          <div className="w-full flex flex-row items-center justify-start gap-x-[12px] mt-[8px]">
+          <div className="w-full flex flex-row items-center sm:justify-start justify-center gap-x-[12px] mt-[8px] sm:flex-nowrap flex-wrap gap-y-[12px] sm:gap-y-0">
             {chartDisplayOptions.map((option) => (
               <Button
                 key={option.value}
@@ -299,14 +299,14 @@ export const FilterComponent = () => {
                 variant="outline"
                 size="xs"
                 active={chartDisplay === option.value}
-                className={'font-[500] w-full'}
+                className={'font-[500] w-full flex-1'}
                 onClick={() => setChartDisplay(option.value as ChartDisplay)}
               />
             ))}
           </div>
         </div>
       </div>
-      <div className="absolute bottom-[20px] left-0 right-0 w-full flex flex-row items-center justify-between px-[24px] gap-x-[12px]">
+      <div className="absolute bottom-[20px] left-0 right-0 sm:w-full w-[calc(100%-32px)] flex flex-row items-center justify-between sm:px-[24px] px-[16px] gap-x-[12px]">
         <Button
           label="Clear"
           variant="outline"

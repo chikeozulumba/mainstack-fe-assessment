@@ -23,7 +23,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       <FilterComponent />
       <Header />
       <div className="max-w-[1160px] mx-auto relative">
-        <SideBarComponent />
+        <div className="sm:block hidden">
+          <SideBarComponent />
+        </div>
         <Outlet />
       </div>
       <TanStackDevtools

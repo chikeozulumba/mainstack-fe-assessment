@@ -33,13 +33,13 @@ const DatePickerTrigger = ({
   return (
     <button
       className={cn(
-        'p-[16px] w-full flex items-center justify-between h-[48px] rounded-[12px] border-[3px]',
+        'sm:px-[16px] py-[16px] px-[8px] w-full flex items-center justify-between h-[48px] rounded-[12px] border-[3px]',
         active && 'border-[#131316]',
         !active && 'border-[#EFF1F6] bg-[#EFF1F6]',
       )}
       {...props}
     >
-      <span className="text-[#131316] text-[14px] font-[500] leading-[16px] tracking-[-0.2px] content-center align-middle">
+      <span className="text-[#131316] text-[14px] font-[500] leading-[16px] tracking-[-0.2px] sm:content-center sm:align-middle line-clamp-1">
         {formattedDate || placeholder}
       </span>
       <ChevronDownIcon className={cn('w-4 h-4', active && 'rotate-180')} />

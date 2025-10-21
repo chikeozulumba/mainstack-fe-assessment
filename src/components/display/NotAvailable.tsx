@@ -1,3 +1,5 @@
+import { useMediaQuery } from 'usehooks-ts'
+
 import { Button } from '../Button'
 
 import { cn } from '@/lib/utils'
@@ -10,6 +12,7 @@ type NotAvailableProps = {
 }
 
 export function NotAvailable({ className, onClick }: NotAvailableProps) {
+  const isSm = useMediaQuery('(max-width: 640px)')
   return (
     <div
       className={cn(
@@ -17,12 +20,12 @@ export function NotAvailable({ className, onClick }: NotAvailableProps) {
         className,
       )}
     >
-      <NAIcon className="h-[48px] w-[48px]" />
-      <div className="mt-[20px]">
-        <h1 className="text-[28px] font-[700] tracking-[-0.6px]">
+      <NAIcon className="sm:h-[48px] h-[40px] sm:w-[48px] w-[40px]" />
+      <div className="sm:mt-[20px] mt-[10px]">
+        <h1 className="sm:text-[28px] text-[20px] font-[700] tracking-[-0.6px]">
           No matching transaction found for the selected filter
         </h1>
-        <h3 className="font-[500] text-[16px] leading-[24px] tracking-[-0.2px] mt-[10px]">
+        <h3 className="sm:font-[500] font-[400] sm:text-[16px] text-[14px] leading-[24px] tracking-[-0.2px] sm:mt-[10px] mt-[4px]">
           Change your filters to see more results, or add a new product.
         </h3>
       </div>
@@ -30,8 +33,9 @@ export function NotAvailable({ className, onClick }: NotAvailableProps) {
       <Button
         variant="secondary"
         label="Clear Filter"
-        className={'mt-[32px]'}
+        className={'sm:mt-[32px] mt-[16px]'}
         onClick={onClick}
+        size={isSm ? 'xs' : undefined}
       />
     </div>
   )

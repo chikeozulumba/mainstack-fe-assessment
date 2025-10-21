@@ -139,10 +139,10 @@ function App() {
   }, [filteredTransactions, chartDisplay])
 
   return (
-    <div className="flex flex-col gap-y-[82px] mb-[120px]">
+    <div className="flex flex-col sm:gap-y-[82px] gap-y-[50px] sm:mb-[120px] mb-[30px]">
       <div className="text-center mt-[64px] flex justify-between items-start">
-        <div className="max-w-[765.21px] w-full flex flex-col">
-          <div className="w-full flex gap-x-[64px] items-center ">
+        <div className="sm:max-w-[765.21px] w-full flex flex-col px-[16px] sm:px-0">
+          <div className="w-full sm:flex gap-x-[64px] items-center sm:text-inherit text-left">
             <div className="flex flex-col gap-y-[8px] align-baseline">
               <h5 className="text-[14px] font-[500] leading-[16px] tracking-[-0.2px] text-[#56616B] text-start content-center align-middle">
                 Available Balance
@@ -156,9 +156,13 @@ function App() {
                 )}
               </h2>
             </div>
-            <Button label="Withdraw" size="lg" />
+            <Button
+              label="Withdraw"
+              size="lg"
+              className={'mt-[24px] sm:mt-0'}
+            />
           </div>
-          <div className="w-full mt-[24px]">
+          <div className="w-full sm:mt-[24px] mt-[48px]">
             <MainChartComponent
               areaChartClassName="max-h-[257px]"
               areaType={'natural'}
@@ -169,12 +173,12 @@ function App() {
           </div>
         </div>
 
-        <div className="max-w-[271px] w-full">
+        <div className="max-w-[271px] w-full sm:block hidden">
           <SideMetricsComponent options={sideMetricWalletOptions} />
         </div>
       </div>
 
-      <div className="w-full">
+      <div className="w-full px-[16px] sm:px-0">
         <TransactionsTableComponent records={filteredTransactionsTableData} />
       </div>
     </div>

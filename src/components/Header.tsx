@@ -1,5 +1,6 @@
 import { Link, useLocation } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 import { Avatar } from './Avatar'
 import { AppsSideComponent } from './header/Apps'
 import { ProfileDropdownComponent } from './header/ProfileDropdown'
@@ -97,6 +98,20 @@ export default function Header() {
   const search = new URLSearchParams(window.location.search)
   const source = search.get('source')
 
+  const isSm = useMediaQuery('(max-width: 640px)')
+
+  const mobileMenu = useMemo(() => {
+    if (!isSm) return []
+
+    return menuItems
+      .filter((item) => item.to !== '/')
+      .map((m) => ({
+        label: m.label,
+        to: m.to,
+        icon: <m.icon width={m.style.width} height={m.style.height} />,
+      }))
+  }, [isSm, menuItems])
+
   return (
     <>
       <header
@@ -110,7 +125,7 @@ export default function Header() {
           <Logo height={36} width={36} />
         </Link>
 
-        <div className="flex items-center">
+        <div className="sm:flex items-center hidden">
           {menuItems.map((item, index) => {
             const active = isActive(item.to)
             const isActiveMenu = activeMenu === item.to
@@ -162,7 +177,7 @@ export default function Header() {
             </button>
           ))}
 
-          <ProfileDropdownComponent>
+          <ProfileDropdownComponent mobileMenu={mobileMenu}>
             <div>
               <Avatar.Main />
             </div>
