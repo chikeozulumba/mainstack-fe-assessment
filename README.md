@@ -1,5 +1,15 @@
 # Welcome to Mainstack Dashboard
 
+Features:
+
+- Responsive design
+- Mobile menu
+- API data
+- Local data
+- Charts
+- Tables
+- Forms
+
 ## Getting Started
 
 To run this application:
