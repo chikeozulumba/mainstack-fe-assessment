@@ -215,7 +215,7 @@ export const FilterComponent = () => {
           </TransitionChild>
         </div>
 
-        <div className="w-full sm:max-h-[100%] max-h-[calc(100%-100px)] h-full overflow-y-scroll sm:overflow-y-hidden pb-[120px] sm:pb-0">
+        <div className="w-full sm:max-h-[100%] max-h-[calc(100%-100px)] h-full overflow-y-scroll pb-[120px] sm:pb-0">
           {/* Range filter options */}
           <div className="w-full flex flex-row items-center sm:justify-between justify-start px-[24px] gap-x-[12px] mt-[8px] sm:flex-nowrap flex-wrap gap-y-[12px] sm:gap-y-0">
             {rangeFilterOptions.map((option) => (
