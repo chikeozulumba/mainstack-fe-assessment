@@ -13,7 +13,7 @@
     "preview": "vite preview",
     "deploy": "bun --bun run build && wrangler deploy",
     "cf-typegen": "wrangler types",
-    "postinstall": "bun --bun run cf-typegen"
+    "postinstall": "bun --bun run cf-typegen || true"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",

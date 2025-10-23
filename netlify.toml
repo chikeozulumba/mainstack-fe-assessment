@@ -1,6 +1,10 @@
 [build]
   command = "vite build"
-  dir = "dist/client"
+  publish = "dist"
+  
+[build.environment]
+  NODE_VERSION = "20"
+
 [dev]
   command = "vite dev"
   port = 3000
