@@ -152,7 +152,7 @@ describe('NotAvailable component', () => {
     it('should have text content wrapper with margin', () => {
       const { container } = render(<NotAvailable />)
       const textWrapper = container.querySelectorAll('div')[1]
-      expect(textWrapper?.className).toContain('mt-[20px]')
+      expect(textWrapper.className).toContain('mt-[20px]')
     })
 
     it('should have description with margin', () => {

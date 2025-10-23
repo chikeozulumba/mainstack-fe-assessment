@@ -245,7 +245,7 @@ describe('Header component', () => {
       // Filter to get only the menu items (excluding logo link)
       const menuLinks = allLinks.filter((link) => {
         const text = link.textContent
-        return expectedOrder.some((item) => text?.includes(item))
+        return expectedOrder.some((item) => text.includes(item))
       })
 
       expect(menuLinks.length).toBe(expectedOrder.length)
